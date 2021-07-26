@@ -1,14 +1,16 @@
-fx_version 'adamant'
-games { 'gta5' }
+fx_version 'cerulean'
+game 'gta5'
+
+description 'QB-TattooShop'
+
+shared_script '@qb-core/import.lua'
 
 client_scripts {
-	'jaymenu.lua',
 	'config.lua',
-	'client.lua'
+	'client/jaymenu.lua'
+	'client/main.lua'
 }
 
-server_scripts {
-	'server.lua'
-}
+server_script 'server/main.lua'
 
 file 'AllTattoos.json'
