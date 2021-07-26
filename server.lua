@@ -25,8 +25,12 @@ QBCore.Functions.CreateCallback('SmallTattoos:PurchaseTattoo', function(source, 
 	local src = source
     local Player = QBCore.Functions.GetPlayer(src)
 
-	-- if Player.getMoney() >= price then
-		-- Player.removeMoney(price)
+ if Player.PlayerData.money.cash >= price then  
+ 	Player.Functions.RemoveMoney('cash', price)
+	TriggerClientEvent('QBCore:Notify', source, "You bought a tattoo", "success")
+ else
+	TriggerClientEvent('QBCore:Notify', source, "not enough cash", "error")
+ end
 		table.insert(tattooList, tattoo)
 
 		exports['ghmattimysql']:execute('UPDATE players SET tattoos = @tattoos WHERE citizenid = @citizenid', {
