@@ -24,7 +24,6 @@ AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
     TriggerServerEvent('Select:Tattoos')
 end)
 
-
 RegisterNetEvent('Apply:Tattoo')
 AddEventHandler('Apply:Tattoo', function(tats)
     QBCore.Functions.TriggerCallback('SmallTattoos:GetPlayerTattoos', function(tattooList)
@@ -175,9 +174,6 @@ end
 RegisterCommand('a', function(source)
     TriggerServerEvent('Select:Tattoos')
 end)
-
-
-
 
 function RemoveTattoo(name, label)
     for k, v in pairs(currentTattoos) do
@@ -442,7 +438,6 @@ function setupScaleform(scaleform, message, button)
     return scaleform
 end
 
-
 function DrawText3Ds(x, y, z, text)
     SetTextScale(0.35, 0.35)
     SetTextFont(4)
@@ -458,23 +453,14 @@ function DrawText3Ds(x, y, z, text)
     ClearDrawOrigin()
 end
 
-Config.coordinates = {
-    vector3(1322.6, -1651.9, 51.2),
-    vector3(-1153.6, -1425.6, 4.9),
-    vector3(322.1, 180.4, 103.5),
-    vector3(-3170.0, 1075.0, 20.8),
-    vector3(1864.6, 3747.7, 33.0),
-    vector3(-293.7, 6200.0, 31.4)
-}
-
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
         
-        for i = 1, #Config.coordinates, 1 do
+        for i = 1, #Config.Shops, 1 do
             local player = PlayerPedId()
             local playerloc = GetEntityCoords(player, 0)
-            local coordinates = Config.coordinates[i]
+            local coordinates = Config.Shops[i]
             local dist = GetDistanceBetweenCoords(coordinates['x'], coordinates['y'], coordinates['z'], playerloc['x'], playerloc['y'], playerloc['z'], true)
             if dist <= 8 then
                 DrawText3Ds(coordinates.x, coordinates.y, coordinates.z + 0.10, "/removealltattoo to remove all tattoos.")
@@ -485,10 +471,10 @@ end)
 
 
 RegisterCommand('removealltattoo', function(source, args, rawCommand)
-    for i = 1, #Config.coordinates, 1 do
+    for i = 1, #Config.Shops, 1 do
         local player = PlayerPedId()
         local playerloc = GetEntityCoords(player, 0)
-        local coordinates = Config.coordinates[i]
+        local coordinates = Config.Shops[i]
         local dist = GetDistanceBetweenCoords(coordinates['x'], coordinates['y'], coordinates['z'], playerloc['x'], playerloc['y'], playerloc['z'], true)
         
         if dist <= 3 then
