@@ -7,7 +7,7 @@ shared_script '@qb-core/import.lua'
 
 client_scripts {
 	'config.lua',
-	'client/jaymenu.lua'
+	'client/jaymenu.lua',
 	'client/main.lua'
 }
 
