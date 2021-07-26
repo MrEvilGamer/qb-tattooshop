@@ -472,7 +472,7 @@ Citizen.CreateThread(function()
         Citizen.Wait(0)
         
         for i = 1, #Config.coordinates, 1 do
-            local player = GetPlayerPed(-1)
+            local player = PlayerPedId()
             local playerloc = GetEntityCoords(player, 0)
             local coordinates = Config.coordinates[i]
             local dist = GetDistanceBetweenCoords(coordinates['x'], coordinates['y'], coordinates['z'], playerloc['x'], playerloc['y'], playerloc['z'], true)
