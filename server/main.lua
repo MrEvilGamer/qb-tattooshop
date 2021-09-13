@@ -3,7 +3,7 @@ QBCore.Functions.CreateCallback('SmallTattoos:GetPlayerTattoos', function(source
     local Player = QBCore.Functions.GetPlayer(src)
     
     if Player then
-        exports['ghmattimysql']:execute('SELECT tattoos FROM players WHERE citizenid = @citizenid', {
+        exports['oxmysql']:execute('SELECT tattoos FROM players WHERE citizenid = @citizenid', {
             ['@citizenid'] = Player.PlayerData.citizenid
         }, function(result)
             if result[1].tattoos then
@@ -29,7 +29,7 @@ QBCore.Functions.CreateCallback('SmallTattoos:PurchaseTattoo', function(source, 
     end
     table.insert(tattooList, tattoo)
     
-    exports['ghmattimysql']:execute('UPDATE players SET tattoos = @tattoos WHERE citizenid = @citizenid', {
+    exports['oxmysql']:execute('UPDATE players SET tattoos = @tattoos WHERE citizenid = @citizenid', {
         ['@tattoos'] = json.encode(tattooList),
         ['@citizenid'] = Player.PlayerData.citizenid
     })
@@ -45,7 +45,7 @@ AddEventHandler('SmallTattoos:RemoveTattoo', function(tattooList)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     
-    exports['ghmattimysql']:execute('UPDATE players SET tattoos = @tattoos WHERE citizenid = @citizenid', {
+    exports['oxmysql']:execute('UPDATE players SET tattoos = @tattoos WHERE citizenid = @citizenid', {
         ['@tattoos'] = json.encode(tattooList),
         ['@citizenid'] = Player.PlayerData.citizenid
     })
@@ -56,7 +56,7 @@ RegisterServerEvent('Select:Tattoos')
 AddEventHandler('Select:Tattoos', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
-    exports['ghmattimysql']:execute('SELECT tattoos FROM players WHERE citizenid = @citizenid', {
+    exports['oxmysql']:execute('SELECT tattoos FROM players WHERE citizenid = @citizenid', {
         ['@citizenid'] = Player.PlayerData.citizenid
     }, function(result)
         if result[1].tattoos then
@@ -74,7 +74,7 @@ AddEventHandler('remover:all', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     if Player then
-        exports['ghmattimysql']:execute('UPDATE players SET tattoos = @tattoos WHERE citizenid = @citizenid', {
+        exports['oxmysql']:execute('UPDATE players SET tattoos = @tattoos WHERE citizenid = @citizenid', {
             ['@tattoos'] = 0,
             ['@citizenid'] = Player.PlayerData.citizenid
         })
