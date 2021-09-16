@@ -89,35 +89,28 @@ function DrawTattoo(collection, name)
 end
 
 function GetNaked()
-    TriggerEvent('skinchanger:getSkin', function()
+
         if GetEntityModel(PlayerPedId()) == 'mp_m_freemode_01' then
-            TriggerEvent('skinchanger:loadSkin', {
-                sex = 0,
-                tshirt_1 = 15,
-                tshirt_2 = 0,
-                arms = 15,
-                torso_1 = 91,
-                torso_2 = 0,
-                pants_1 = 14,
-                pants_2 = 0,
-                shoes_1 = 5,
-                glasses_1 = 0
-            })
+                      local NakedData = {
+                outfitData = {
+                    ["arms"]= {item = 15,texture=0};
+                    ["t-shirt"]   = { item = 15, texture = 0},  -- Nek / Das
+                    ["torso2"]= {item = 15,texture=0},
+                    ["pants"]= {item = 21,texture=0},
+                }
+            }
+            TriggerEvent('qb-clothing:client:loadOutfit', NakedData)
         else
-            TriggerEvent('skinchanger:loadSkin', {
-                sex = 1,
-                tshirt_1 = 34,
-                tshirt_2 = 0,
-                arms = 15,
-                torso_1 = 101,
-                torso_2 = 1,
-                pants_1 = 16,
-                pants_2 = 0,
-                shoes_1 = 5,
-                glasses_1 = 5
-            })
+            local NakedData = {
+                outfitData = {
+                    ["arms"]= {item = 15,texture=0};
+                    ["t-shirt"]   = { item = 15, texture = 0},  -- Nek / Das
+                    ["torso2"]= {item = 15,texture=0},
+                    ["pants"]= {item = 21,texture=0},
+                }
+            }
+            TriggerEvent('qb-clothing:client:loadOutfit', NakedData)
         end
-    end)
 end
 
 function ResetSkin()
@@ -150,6 +143,7 @@ function CloseTattooShop()
     ClearAdditionalText(9, 1)
     FreezeEntityPosition(PlayerPedId(), false)
     EnableAllControlActions(0)
+    TriggerServerEvent("qb-clothes:loadPlayerSkin")	
     back = 1
     opacity = 1
     return true
