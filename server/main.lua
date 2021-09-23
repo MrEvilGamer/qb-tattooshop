@@ -24,9 +24,8 @@ QBCore.Functions.CreateCallback('SmallTattoos:PurchaseTattoo', function(source, 
     if Player.PlayerData.money.cash >= price then
         Player.Functions.RemoveMoney('cash', price)
         TriggerClientEvent('QBCore:Notify', source, "You bought a tattoo", "success")
-    else
-        TriggerClientEvent('QBCore:Notify', source, "not enough cash", "error")
     end
+        
     table.insert(tattooList, tattoo)
     
     exports.oxmysql:execute('UPDATE players SET tattoos = @tattoos WHERE citizenid = @citizenid', {
