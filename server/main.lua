@@ -38,6 +38,8 @@ QBCore.Functions.CreateCallback('SmallTattoos:PurchaseTattoo', function(source, 
     cb(true)
     
     TriggerClientEvent('Apply:Tattoo', source, tattoo, tattooList)
+    else
+    TriggerClientEvent('QBCore:Notify', source, "not enough cash", "error")
 end)
 
 RegisterServerEvent('SmallTattoos:RemoveTattoo')
