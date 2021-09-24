@@ -24,7 +24,6 @@ QBCore.Functions.CreateCallback('SmallTattoos:PurchaseTattoo', function(source, 
     if Player.PlayerData.money.cash >= price then
         Player.Functions.RemoveMoney('cash', price)
         TriggerClientEvent('QBCore:Notify', source, "You bought a tattoo", "success")
-    end
         
     table.insert(tattooList, tattoo)
     
@@ -39,6 +38,7 @@ QBCore.Functions.CreateCallback('SmallTattoos:PurchaseTattoo', function(source, 
     TriggerClientEvent('Apply:Tattoo', source, tattoo, tattooList)
     else
         TriggerClientEvent('QBCore:Notify', source, "not enough cash", "error")
+    end 
 end)
 
 RegisterServerEvent('SmallTattoos:RemoveTattoo')
