@@ -3,10 +3,9 @@ game 'gta5'
 
 description 'QB-TattooShop'
 
-shared_script '@qb-core/import.lua'
+shared_script 'config.lua'
 
 client_scripts {
-	'config.lua',
 	'client/jaymenu.lua',
 	'client/main.lua'
 }
