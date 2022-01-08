@@ -1,3 +1,5 @@
+local QBCore = exports['qb-core']:GetCoreObject()
+
 local currentTattoos = {}
 local cam = nil
 local back = 1
