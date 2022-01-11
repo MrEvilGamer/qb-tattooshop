@@ -19,7 +19,9 @@ Config.Shops = {
 	vector3(-293.7, 6200.0, 31.4)
 }
 
-Config.interiorIds = {}
-for k, v in ipairs(Config.Shops) do
-    Config.interiorIds[#Config.interiorIds + 1] = GetInteriorAtCoords(v)
+if not IsDuplicityVersion() then
+	Config.interiorIds = {}
+	for k, v in ipairs(Config.Shops) do
+		Config.interiorIds[#Config.interiorIds + 1] = GetInteriorAtCoords(v)
+	end
 end
