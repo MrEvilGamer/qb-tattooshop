@@ -38,19 +38,6 @@ AddEventHandler('Apply:Tattoo', function(tats)
     end)
 end)
 
---[[RegisterNetEvent('Apply:PedTattoo')
-AddEventHandler('Apply:PedTattoo', function(tats, hash)
-	print('recebendo o npc')
-	QBCore.Functions.TriggerCallback('SmallTattoos:GetPlayerTattoos', function(tattooList)
-		if tattooList then
-			for k, v in pairs(tattooList) do
-				SetPedDecoration(hash, v.collection, v.nameHash)
-			end
-			currentTattoos = tattooList
-		end
-	end)
-end)]]
-
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(300000)
