@@ -38,6 +38,19 @@ AddEventHandler('Apply:Tattoo', function(tats)
     end)
 end)
 
+--[[RegisterNetEvent('Apply:PedTattoo')
+AddEventHandler('Apply:PedTattoo', function(tats, hash)
+	print('recebendo o npc')
+	QBCore.Functions.TriggerCallback('SmallTattoos:GetPlayerTattoos', function(tattooList)
+		if tattooList then
+			for k, v in pairs(tattooList) do
+				SetPedDecoration(hash, v.collection, v.nameHash)
+			end
+			currentTattoos = tattooList
+		end
+	end)
+end)]]
+
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(300000)
@@ -78,41 +91,35 @@ function DrawTattoo(collection, name)
 end
 
 function GetNaked()
-    if GetEntityModel(PlayerPedId()) == `mp_m_freemode_01` then
-        local nakedMale = {
-            outfitData = {
-                ["pants"]       = { item = 14, texture = 0},  -- Broek
-                ["arms"]        = { item = 15, texture = 0},  -- Armen
-                ["t-shirt"]     = { item = 15, texture = 0},  -- T Shirt
-                ["vest"]        = { item = 0, texture = 0},  -- Body Vest
-                ["torso2"]      = { item = 91, texture = 0},  -- Jas / Vesten
-                ["shoes"]       = { item = 5, texture = 0},  -- Schoenen
-                ["decals"]      = { item = 10, texture = 0},  -- Decals
-                ["accessory"]   = { item = 0, texture = 0},  -- Nek / Das
-                ["hat"]         = { item = -1, texture = -1},  -- Pet
-                ["glass"]       = { item = 0, texture = 0},  -- Bril
-                ["mask"]         = { item = 0, texture = 0},  -- Masker
-            },
-        }
-        TriggerEvent('qb-clothing:client:loadOutfit', nakedMale)
-    else
-        local nakedFemale = {
-            outfitData = {
-                ["pants"]       = { item = 16, texture = 0},  -- Broek
-                ["arms"]        = { item = 15, texture = 0},  -- Armen
-                ["t-shirt"]     = { item = -1, texture = 0},  -- T Shirt
-                ["vest"]        = { item = 0, texture = 0},  -- Body Vest
-                ["torso2"]      = { item = 101, texture = 1},  -- Jas / Vesten
-                ["shoes"]       = { item = 5, texture = 0},  -- Schoenen
-                ["decals"]      = { item = 0, texture = 0},  -- Decals
-                ["accessory"]   = { item = 0, texture = 0},  -- Nek / Das
-                ["hat"]         = { item = -1, texture = -1},  -- Pet
-                ["glass"]       = { item = 0, texture = 0},  -- Bril
-                ["mask"]         = { item = 0, texture = 0},  -- Masker
-            },
-        }
-        TriggerEvent('qb-clothing:client:loadOutfit', nakedFemale)
-    end
+    TriggerEvent('skinchanger:getSkin', function()
+        if GetEntityModel(PlayerPedId()) == 'mp_m_freemode_01' then
+            TriggerEvent('skinchanger:loadSkin', {
+                sex = 0,
+                tshirt_1 = 15,
+                tshirt_2 = 0,
+                arms = 15,
+                torso_1 = 91,
+                torso_2 = 0,
+                pants_1 = 14,
+                pants_2 = 0,
+                shoes_1 = 5,
+                glasses_1 = 0
+            })
+        else
+            TriggerEvent('skinchanger:loadSkin', {
+                sex = 1,
+                tshirt_1 = 34,
+                tshirt_2 = 0,
+                arms = 15,
+                torso_1 = 101,
+                torso_2 = 1,
+                pants_1 = 16,
+                pants_2 = 0,
+                shoes_1 = 5,
+                glasses_1 = 5
+            })
+        end
+    end)
 end
 
 function ResetSkin()
