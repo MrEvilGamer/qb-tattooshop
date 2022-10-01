@@ -7,7 +7,7 @@ local opacity = 1
 local scaleType = nil
 local scaleString = ""
 
-Citizen.CreateThread(function()
+CreateThread(function()
     AddTextEntry("ParaTattoos", "Tattoo Shop")
     for k, v in pairs(Config.Shops) do
         local blip = AddBlipForCoord(v)
@@ -20,14 +20,11 @@ Citizen.CreateThread(function()
     end
 end)
 
-RegisterNetEvent('QBCore:Client:OnPlayerLoaded')
-AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
-    isLoggedIn = true
+RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
     TriggerServerEvent('Select:Tattoos')
 end)
 
-RegisterNetEvent('Apply:Tattoo')
-AddEventHandler('Apply:Tattoo', function(tats)
+RegisterNetEvent('Apply:Tattoo', function(tats)
     QBCore.Functions.TriggerCallback('SmallTattoos:GetPlayerTattoos', function(tattooList)
         if tattooList then
             for k, v in pairs(tattooList) do
@@ -38,8 +35,7 @@ AddEventHandler('Apply:Tattoo', function(tats)
     end)
 end)
 
---[[RegisterNetEvent('Apply:PedTattoo')
-AddEventHandler('Apply:PedTattoo', function(tats, hash)
+--[[RegisterNetEvent('Apply:PedTattoo', function(tats, hash)
 	print('recebendo o npc')
 	QBCore.Functions.TriggerCallback('SmallTattoos:GetPlayerTattoos', function(tattooList)
 		if tattooList then
@@ -51,9 +47,9 @@ AddEventHandler('Apply:PedTattoo', function(tats, hash)
 	end)
 end)]]
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
-        Citizen.Wait(300000)
+        Wait(300000)
         if not IsMenuOpen() then
             QBCore.Functions.TriggerCallback('SmallTattoos:GetPlayerTattoos', function(tattooList)
                 if tattooList then
@@ -138,7 +134,7 @@ end
 function ReqTexts(text, slot)
     RequestAdditionalText(text, slot)
     while not HasAdditionalTextLoaded(slot) do
-        Citizen.Wait(0)
+        Wait(0)
     end
 end
 
@@ -197,7 +193,7 @@ function CreateScale(sType)
     end
 end
 
-Citizen.CreateThread(function()
+CreateThread(function()
     JayMenu.CreateMenu("tattoo", "Tattoo Shop", function()
         return CloseTattooShop()
     end)
@@ -209,7 +205,7 @@ Citizen.CreateThread(function()
     end
     
     while true do
-        Citizen.Wait(0)
+        Wait(0)
         local CanSleep = true
         if not IsMenuOpen() then
             for _, interiorId in ipairs(Config.interiorIds) do
@@ -350,7 +346,7 @@ Citizen.CreateThread(function()
             end
         end
         if CanSleep then
-            Citizen.Wait(3000)
+            Wait(3000)
         end
     end
 end)
@@ -368,7 +364,7 @@ end
 function setupScaleform2(scaleform, message, button, message2, buttons, message3, button2)
     local scaleform = RequestScaleformMovie(scaleform)
     while not HasScaleformMovieLoaded(scaleform) do
-        Citizen.Wait(0)
+        Wait(0)
     end
     PushScaleformMovieFunction(scaleform, "CLEAR_ALL")
     PopScaleformMovieFunctionVoid()
@@ -412,7 +408,7 @@ end
 function setupScaleform(scaleform, message, button)
     local scaleform = RequestScaleformMovie(scaleform)
     while not HasScaleformMovieLoaded(scaleform) do
-        Citizen.Wait(0)
+        Wait(0)
     end
     PushScaleformMovieFunction(scaleform, "CLEAR_ALL")
     PopScaleformMovieFunctionVoid()
@@ -455,9 +451,9 @@ function DrawText3Ds(x, y, z, text)
     ClearDrawOrigin()
 end
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
-        Citizen.Wait(0)
+        Wait(0)
         
         for i = 1, #Config.Shops, 1 do
             local player = PlayerPedId()
@@ -488,8 +484,7 @@ RegisterCommand('removealltattoo', function(source, args, rawCommand)
     end
 end)
 
-RegisterNetEvent('remover:tudo')
-AddEventHandler('remover:tudo', function()
+RegisterNetEvent('remover:tudo', function()
     local ped = PlayerPedId()
     ClearPedDecorationsLeaveScars(ped)
 end)
